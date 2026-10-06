@@ -1,0 +1,143 @@
+@import "tailwindcss";
+
+/*
+  Design direction (written so every choice has a reason):
+  - Paper + ink base: the product lives between a laptop and a lock screen, so the page
+    reads like a calm, printed surface and the color is reserved for "signals".
+  - One signal accent (#ff5b23): used only where the product sends or asks for something.
+  - State aura: the radial gradient in the hero is not decoration; its hue follows the
+    demo state (waiting / approved / voice / aborted), the same way a notification does.
+  - Google Sans Flex for everything readable, Google Sans Code for CLI output,
+    Instrument Serif italic for a single accent phrase per headline.
+*/
+
+@theme {
+  --font-sans: var(--font-gsans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-gcode), ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-serif: var(--font-iserif), ui-serif, Georgia, serif;
+
+  --color-paper: #f6f5f1;
+  --color-paper-2: #efede7;
+  --color-card: #fbfaf8;
+  --color-ink: #0e0e10;
+  --color-ink-2: #46443f;
+  --color-ink-3: #66635c;
+  --color-line: rgb(14 14 16 / 0.09);
+  --color-line-strong: rgb(14 14 16 / 0.16);
+  --color-signal: #10b981;
+  --color-signal-ink: #047857;
+  --color-ok: #10b981;
+  --color-ok-ink: #065f46;
+  --color-voice: #6f5cff;
+  --color-stop: #e5484d;
+  --color-night: #0b0c0f;
+  --color-night-2: #15171c;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@layer base {
+  html {
+    background: var(--color-paper);
+    color: var(--color-ink);
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    min-height: 100vh;
+    font-family: var(--font-sans);
+    font-optical-sizing: auto;
+    overflow-x: clip;
+  }
+
+  ::selection {
+    background: #d1fae5;
+    color: var(--color-ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-ink);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+
+  button {
+    cursor: pointer;
+  }
+}
+
+/* Display type: large sizes need tighter tracking and a slightly condensed width axis */
+.type-display {
+  font-family: var(--font-sans);
+  font-variation-settings: "wdth" 96, "opsz" 144;
+  letter-spacing: -0.045em;
+  line-height: 0.96;
+  font-weight: 450;
+}
+
+.type-heading {
+  font-family: var(--font-sans);
+  font-variation-settings: "wdth" 98, "opsz" 72;
+  letter-spacing: -0.032em;
+  line-height: 1.04;
+  font-weight: 460;
+}
+
+.type-serif {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  padding-right: 0.1em;
+}
+
+.type-label {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.01em;
+  line-height: 1.4;
+}
+
+/* Film grain on top of the aura: stops gradient banding and gives the color a printed feel */
+.grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.22;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.55 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+
+/* Hairline that fades at both ends, used for section dividers */
+.hairline {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-line-strong) 12%, var(--color-line-strong) 88%, transparent);
+}
+
+.cursor-blink {
+  animation: blink 1.05s steps(1) infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+/* Scrollbars inside code panels */
+.scroll-thin {
+  scrollbar-width: thin;
+  scrollbar-color: rgb(255 255 255 / 0.15) transparent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cursor-blink {
+    animation: none;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
