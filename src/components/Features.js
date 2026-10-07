@@ -21,6 +21,7 @@ import {
 } from "@tabler/icons-react";
 import { SplitWords, Reveal, SectionIndex, EASE } from "./motion";
 import { useLanguage } from "./LanguageContext";
+import WatchBand from "./WatchBand";
 
 export default function Features() {
   const { t, lang } = useLanguage();
@@ -249,7 +250,7 @@ function WristVisual() {
 
   return (
     <div className="flex w-full max-w-[420px] min-w-0 flex-col items-center">
-      <div className="relative">
+      <div className="relative my-[72px]">
         {/* Emerald green pulse rings */}
         <AnimatePresence>
           {buzzing &&
@@ -275,6 +276,7 @@ function WristVisual() {
           transition={{ duration: 0.5, repeat: buzzing ? 1 : 0 }}
           className="relative w-[236px] sm:w-[252px] rounded-[56px] sm:rounded-[64px] bg-[#1a1a1c] p-[7px] sm:p-[8px] shadow-[0_40px_80px_-30px_rgb(14_14_16/0.6),inset_0_0_0_2px_#3a3a3c]"
         >
+          <WatchBand size="lg" />
           <div className="flex aspect-[4/4.7] flex-col justify-between rounded-[48px] sm:rounded-[54px] bg-black px-3.5 py-3.5 sm:px-4 sm:py-4 text-white">
             <div className="flex items-center justify-between text-[11px] text-white/60">
               <span className="flex items-center gap-1 font-mono">

@@ -17,6 +17,7 @@ import { EASE } from "./motion";
 import { AURA } from "./Aura";
 import { useLanguage } from "./LanguageContext";
 import { LogoSymbol } from "./Nav";
+import WatchBand from "./WatchBand";
 
 const LOGS_BY_LANG = {
   id: {
@@ -386,7 +387,7 @@ function Watch({ state, phase }) {
           ? { duration: 0.55, repeat: 1, repeatDelay: 0.25 }
           : { duration: 0.4 }
       }
-      className="absolute -bottom-2 left-0 w-[152px] sm:left-2 lg:-left-6 lg:bottom-4"
+      className="absolute bottom-10 left-0 w-[152px] sm:left-2 lg:-left-6 lg:bottom-14"
       style={{ rotate: -6 }}
     >
       {/* Green Haptic rings */}
@@ -404,6 +405,7 @@ function Watch({ state, phase }) {
           ))}
       </AnimatePresence>
       <div className="relative rounded-[44px] bg-[#1a1a1c] p-[7px] shadow-[0_24px_50px_-20px_rgb(14_14_16/0.7),inset_0_0_0_1.5px_#3a3a3c]">
+        <WatchBand />
         <div className="flex aspect-[4/4.6] flex-col justify-between rounded-[37px] bg-black p-3.5 text-white">
           <div className="flex items-center justify-between text-[10px] text-white/60">
             <span className="flex items-center gap-1 font-mono">
