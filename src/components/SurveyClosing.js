@@ -173,7 +173,7 @@ export default function SurveyClosing() {
               <div className="my-10 h-px bg-line" />
 
               {/* 2. EMAIL INPUT & CTA SPEC (SEKARANG DI BAWAH SURVEY SESUAI REQ #15) */}
-              <div className="max-w-[620px]">
+              <div className="w-full">
                 <WaitlistForm id="closing-email" source="survey" />
               </div>
             </div>

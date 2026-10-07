@@ -161,7 +161,7 @@ export function WaitlistForm({ id, source = "hero", tone = "light" }) {
   };
 
   return (
-    <form noValidate onSubmit={handleSubmit} className="w-full">
+    <form noValidate onSubmit={handleSubmit} className="w-full max-w-[640px]">
       <div
         className={`group relative flex flex-col gap-2 rounded-[24px] p-2 transition-shadow duration-300 sm:flex-row sm:items-center sm:gap-2 sm:rounded-full sm:p-1.5 ${
           dark
@@ -289,7 +289,7 @@ export function SuccessCard({ tone }) {
       initial={{ opacity: 0, y: 12, scale: 0.98 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
       transition={{ duration: 0.6, ease: EASE }}
-      className={`rounded-[28px] p-6 text-left sm:p-7 ${
+      className={`w-full rounded-[28px] p-6 text-left sm:p-7 ${
         dark
           ? "bg-white/[0.06] ring-1 ring-white/15"
           : "bg-white ring-1 ring-ok/30 shadow-[0_12px_32px_-16px_rgb(16_185_129/0.25)]"
@@ -312,18 +312,18 @@ export function SuccessCard({ tone }) {
           <p className={`mt-1.5 text-[14px] leading-relaxed ${dark ? "text-white/75" : "text-ink-2"}`}>
             {t.survey.successDesc}
           </p>
-          <div className="mt-4 flex flex-col gap-2.5 sm:flex-row sm:items-center sm:gap-3">
+          <div className="mt-4 flex flex-col gap-2.5 sm:flex-row sm:items-center sm:gap-3.5">
             <button
               type="button"
               onClick={share}
-              className={`inline-flex min-h-11 items-center justify-center gap-2 rounded-full px-5 text-sm font-medium transition-colors cursor-pointer ${
+              className={`inline-flex min-h-11 items-center justify-center gap-2 rounded-full px-5 text-sm font-medium whitespace-nowrap shrink-0 transition-colors cursor-pointer ${
                 dark
                   ? "bg-white text-ink hover:bg-white/90"
                   : "bg-ink text-white hover:bg-[#25252a]"
               }`}
             >
               {copied ? <IconCheck size={16} aria-hidden /> : <IconCopy size={16} aria-hidden />}
-              <span>{copied ? t.survey.copiedText : t.survey.shareBtn}</span>
+              <span className="whitespace-nowrap">{copied ? t.survey.copiedText : t.survey.shareBtn}</span>
             </button>
             <span className={`text-[13px] ${dark ? "text-white/60" : "text-ink-3"}`}>
               {t.survey.jumpQueue}
