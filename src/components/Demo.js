@@ -28,7 +28,7 @@ const LOGS_BY_LANG = {
       { t: "✓ Security lint passed: 0 vulnerabilities found", k: "ok" },
     ],
     approved: [
-      { t: "✓ Remote Signal: [Approve & Push] diterima dari iPhone Lock Screen", k: "hl" },
+      { t: "✓ Remote Signal: [Approve] diterima dari iPhone Lock Screen", k: "hl" },
       { t: '$ git add . && git commit -m "refactor(auth): session token rotation"', k: "cmd" },
       { t: "[main 9d28a1c] refactor(auth): session token rotation (14 files changed, +184, -72)", k: "info" },
       { t: "✓ Pushed to origin/main successfully. Task selesai saat kamu di luar meja!", k: "ok" },
@@ -40,7 +40,7 @@ const LOGS_BY_LANG = {
       { t: "Agent mengeksekusi revisi teknis sekarang...", k: "info" },
     ],
     aborted: [
-      { t: "✕ Remote Signal: [Abort] dieksekusi", k: "err" },
+      { t: "✕ Remote Signal: [Reject] dieksekusi", k: "err" },
       { t: "$ git checkout -- . && git clean -fd", k: "cmd" },
       { t: "Working tree bersih. Perubahan dibatalkan tanpa side-effects.", k: "info" },
     ],
@@ -53,7 +53,7 @@ const LOGS_BY_LANG = {
       { t: "✓ Security lint passed: 0 vulnerabilities found", k: "ok" },
     ],
     approved: [
-      { t: "✓ Remote Signal: [Approve & Push] received from iPhone Lock Screen", k: "hl" },
+      { t: "✓ Remote Signal: [Approve] received from iPhone Lock Screen", k: "hl" },
       { t: '$ git add . && git commit -m "refactor(auth): session token rotation"', k: "cmd" },
       { t: "[main 9d28a1c] refactor(auth): session token rotation (14 files changed, +184, -72)", k: "info" },
       { t: "✓ Pushed to origin/main successfully while you were away from your desk!", k: "ok" },
@@ -65,7 +65,7 @@ const LOGS_BY_LANG = {
       { t: "Agent executing technical revisions now...", k: "info" },
     ],
     aborted: [
-      { t: "✕ Remote Signal: [Abort] executed", k: "err" },
+      { t: "✕ Remote Signal: [Reject] executed", k: "err" },
       { t: "$ git checkout -- . && git clean -fd", k: "cmd" },
       { t: "Working tree clean. Changes reverted with zero side-effects.", k: "info" },
     ],
@@ -341,7 +341,11 @@ function Phone({ state, phase, act }) {
                           : "bg-white/90 text-ink hover:bg-white ring-1 ring-line"
                       }`}
                     >
-                      <span>{t.demo.btnVoice}</span>
+                      {state === "voice" ? (
+                        <IconMicrophone size={16} aria-label="Listening" />
+                      ) : (
+                        <span>{t.demo.btnVoice}</span>
+                      )}
                     </motion.button>
                     <motion.button
                       type="button"
@@ -354,7 +358,11 @@ function Phone({ state, phase, act }) {
                           : "bg-white/90 text-stop hover:bg-white ring-1 ring-line"
                       }`}
                     >
-                      <span>{t.demo.btnAbort}</span>
+                      {state === "aborted" ? (
+                        <IconX size={16} stroke={2.4} aria-label="Rejected" />
+                      ) : (
+                        <span>{t.demo.btnAbort}</span>
+                      )}
                     </motion.button>
                   </div>
                 </motion.div>
@@ -406,16 +414,16 @@ function Watch({ state, phase, act }) {
       </AnimatePresence>
       <div className="relative rounded-[44px] bg-[#1a1a1c] p-[7px] shadow-[0_24px_50px_-20px_rgb(14_14_16/0.7),inset_0_0_0_1.5px_#3a3a3c]">
         <WatchBand />
-        <div className="flex aspect-[4/4.8] flex-col justify-between rounded-[37px] bg-black p-3 text-white">
-          <div className="flex items-center justify-between text-[8.5px] text-white/60">
+        <div className="flex aspect-[4/4.8] flex-col justify-between overflow-hidden rounded-[37px] bg-black px-2.5 pt-2.5 pb-2.5 sm:px-3 sm:pt-3 sm:pb-3 text-white">
+          <div className="flex items-center justify-between text-[7.5px] text-white/60">
             <span className="flex items-center gap-1 text-white">
-              <LogoSymbol size="xs" />
-              <span className="flex items-baseline text-[8.5px] font-semibold tracking-[-0.03em]" style={{ fontVariationSettings: '"wdth" 92' }}>
-                <span className="type-serif italic font-normal text-[10px] tracking-normal pr-[0.02em]">vibe</span>
+              <LogoSymbol size="2xs" />
+              <span className="flex items-baseline text-[7.5px] font-semibold tracking-[-0.03em]" style={{ fontVariationSettings: '"wdth" 92' }}>
+                <span className="type-serif italic font-normal text-[8.5px] tracking-normal pr-[0.02em]">vibe</span>
                 <span>tification</span>
               </span>
             </span>
-            <span className="font-mono tabular-nums text-[8.5px] text-white/50">10:42</span>
+            <span className="font-mono tabular-nums text-[7.5px] text-white/50">10:42</span>
           </div>
 
           <div className="my-auto flex items-center gap-1.5 py-0.5">
@@ -429,40 +437,40 @@ function Watch({ state, phase, act }) {
                   ? "#e5484d"
                   : "#10b981",
               }}
-              className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-white"
+              className="flex h-4 w-4 sm:h-4.5 sm:w-4.5 shrink-0 items-center justify-center rounded-full text-white"
             >
               {voice ? (
-                <IconMicrophone size={13} aria-hidden />
+                <IconMicrophone size={9} aria-hidden />
               ) : state === "aborted" ? (
-                <IconX size={13} stroke={2.6} aria-hidden />
+                <IconX size={9} stroke={2.6} aria-hidden />
               ) : (
-                <IconCheck size={13} stroke={2.4} aria-hidden />
+                <IconCheck size={9} stroke={2.4} aria-hidden />
               )}
             </motion.span>
             <div className="min-w-0 flex-1">
-              <span className="block text-[10.5px] font-semibold leading-tight text-white truncate">
+              <span className="block text-[8.5px] sm:text-[9px] font-semibold leading-tight text-white truncate">
                 Claude Code
               </span>
-              <span className="block text-[9px] text-emerald-400 font-mono leading-tight truncate">
+              <span className="block text-[6.8px] sm:text-[7.2px] text-emerald-400 font-mono leading-tight truncate">
                 {voice ? "Listening voice..." : "12 test passed"}
               </span>
             </div>
           </div>
 
           {/* Action Buttons on Wrist matching mobile lock screen */}
-          <div className="grid grid-cols-3 gap-1 pt-1.5 border-t border-white/[0.08]">
+          <div className="grid grid-cols-3 gap-0.5 sm:gap-1 pt-1 border-t border-white/[0.08]">
             <motion.button
               type="button"
               whileTap={{ scale: 0.93 }}
               onClick={() => act && act("approved")}
               aria-pressed={state === "approved"}
-              className={`flex h-[25px] sm:h-[27px] items-center justify-center gap-0.5 rounded-full px-1 text-[8.5px] font-semibold transition-colors cursor-pointer ${
+              className={`flex h-[19px] sm:h-[21px] items-center justify-center gap-0.5 rounded-full px-0.5 text-[6.8px] sm:text-[7.5px] font-semibold transition-colors cursor-pointer ${
                 state === "approved"
                   ? "bg-ok text-white shadow-xs"
                   : "bg-white/15 text-white hover:bg-white/25"
               }`}
             >
-              <IconCheck size={10} stroke={2.8} className="shrink-0" aria-hidden />
+              <IconCheck size={8} stroke={2.8} className="shrink-0" aria-hidden />
               <span>{t.features?.f1Approve || "Approve"}</span>
             </motion.button>
             <motion.button
@@ -470,13 +478,13 @@ function Watch({ state, phase, act }) {
               whileTap={{ scale: 0.93 }}
               onClick={() => act && act("voice")}
               aria-pressed={state === "voice"}
-              className={`flex h-[25px] sm:h-[27px] items-center justify-center gap-0.5 rounded-full px-1 text-[8.5px] font-semibold transition-colors cursor-pointer ${
+              className={`flex h-[19px] sm:h-[21px] items-center justify-center gap-0.5 rounded-full px-0.5 text-[6.8px] sm:text-[7.5px] font-semibold transition-colors cursor-pointer ${
                 state === "voice"
                   ? "bg-voice text-white shadow-xs"
                   : "bg-white/15 text-white hover:bg-white/25"
               }`}
             >
-              <IconMicrophone size={10} className="shrink-0" aria-hidden />
+              <IconMicrophone size={8} className="shrink-0" aria-hidden />
               <span>{t.features?.f1Reply || "Reply"}</span>
             </motion.button>
             <motion.button
@@ -484,14 +492,14 @@ function Watch({ state, phase, act }) {
               whileTap={{ scale: 0.93 }}
               onClick={() => act && act("aborted")}
               aria-pressed={state === "aborted"}
-              className={`flex h-[25px] sm:h-[27px] items-center justify-center gap-0.5 rounded-full px-1 text-[8.5px] font-semibold transition-colors cursor-pointer ${
+              className={`flex h-[19px] sm:h-[21px] items-center justify-center gap-0.5 rounded-full px-0.5 text-[6.8px] sm:text-[7.5px] font-semibold transition-colors cursor-pointer ${
                 state === "aborted"
                   ? "bg-stop text-white shadow-xs"
                   : "bg-white/15 text-stop hover:bg-white/25"
               }`}
             >
-              <IconX size={10} stroke={2.8} className="shrink-0" aria-hidden />
-              <span>{t.demo?.btnAbort || "Abort"}</span>
+              <IconX size={8} stroke={2.8} className="shrink-0" aria-hidden />
+              <span>{t.features?.f1Reject || "Reject"}</span>
             </motion.button>
           </div>
         </div>

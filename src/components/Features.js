@@ -278,23 +278,23 @@ function WristVisual() {
           className="relative w-[236px] sm:w-[252px] rounded-[56px] sm:rounded-[64px] bg-[#1a1a1c] p-[7px] sm:p-[8px] shadow-[0_40px_80px_-30px_rgb(14_14_16/0.6),inset_0_0_0_2px_#3a3a3c]"
         >
           <WatchBand size="lg" />
-          <div className="flex aspect-[4/4.7] flex-col justify-between rounded-[48px] sm:rounded-[54px] bg-black px-3.5 py-3.5 sm:px-4 sm:py-4 text-white">
-            <div className="flex items-center justify-between text-[10.5px] text-white/60">
+          <div className="flex aspect-[4/4.7] flex-col justify-between rounded-[48px] sm:rounded-[54px] bg-black px-3.5 py-3 sm:px-4 sm:py-3.5 text-white">
+            <div className="flex items-center justify-between text-[9.5px] text-white/60">
               <span className="flex items-center gap-1.5 text-white">
-                <LogoSymbol size="xs" />
-                <span className="flex items-baseline text-[11px] font-semibold tracking-[-0.03em]" style={{ fontVariationSettings: '"wdth" 92' }}>
-                  <span className="type-serif italic font-normal text-[12.5px] tracking-normal pr-[0.03em]">vibe</span>
+                <LogoSymbol size="2xs" />
+                <span className="flex items-baseline text-[9.5px] font-semibold tracking-[-0.03em]" style={{ fontVariationSettings: '"wdth" 92' }}>
+                  <span className="type-serif italic font-normal text-[11px] tracking-normal pr-[0.03em]">vibe</span>
                   <span>tification</span>
                 </span>
               </span>
-              <span className="font-mono text-[10px] text-white/50 tabular-nums">10:42</span>
+              <span className="font-mono text-[9px] text-white/50 tabular-nums">10:42</span>
             </div>
 
-            {/* Rich Watch Content matching Gambar 1 */}
+            {/* Realistic Micro-UI Content matching smartwatch scale */}
             <div className="my-auto space-y-1 py-0.5 text-left">
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-1.5">
                 <span
-                  className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-white transition-colors ${
+                  className={`flex h-4.5 w-4.5 sm:h-5 sm:w-5 shrink-0 items-center justify-center rounded-full text-white transition-colors ${
                     decision === "approve"
                       ? "bg-ok"
                       : decision === "reject"
@@ -303,66 +303,67 @@ function WristVisual() {
                   }`}
                 >
                   {decision === "reject" ? (
-                    <IconX size={13} stroke={2.6} aria-hidden />
+                    <IconX size={10} stroke={2.6} aria-hidden />
                   ) : (
                     <IconCheck
-                      size={13}
+                      size={10}
                       stroke={2.6}
                       className={decision === "approve" ? "text-white" : "text-emerald-400"}
                       aria-hidden
                     />
                   )}
                 </span>
-                <span className="font-mono text-[11px] font-medium leading-tight text-emerald-400">
+                <span className="font-mono text-[9.5px] sm:text-[10px] font-medium leading-tight text-emerald-400">
                   {t.features.f1WatchAgent}
                 </span>
               </div>
-              <h4 className="text-[13.5px] font-semibold leading-snug text-white sm:text-[14.5px]">
+              <h4 className="text-[11.5px] font-semibold leading-snug text-white sm:text-[12px]">
                 {t.features.f1WatchTitle}
               </h4>
-              <p className="text-[11px] leading-relaxed text-white/65 sm:text-[11.5px]">
+              <p className="text-[9.5px] leading-relaxed text-white/65 sm:text-[10px]">
                 {t.features.f1WatchSubtitle}
               </p>
             </div>
-            {/* Buttons: 3 Actionable Buttons (Approve, Voice Reply, Reject) */}
-            <div className="grid grid-cols-3 gap-1 sm:gap-1.5">
+
+            {/* Buttons: 3 Standardized Actionable Buttons (Approve, Reply, Reject) */}
+            <div className="grid grid-cols-3 gap-1 sm:gap-1.5 pt-1 border-t border-white/[0.08]">
               <button
                 type="button"
                 onClick={() => setDecision("approve")}
                 aria-pressed={decision === "approve"}
-                className={`flex min-h-[36px] sm:min-h-[40px] px-1 sm:px-2 py-1 items-center justify-center gap-1 rounded-full text-[11px] sm:text-[12px] font-semibold transition-colors cursor-pointer ${
+                className={`flex h-[26px] sm:h-[28px] px-1 sm:px-1.5 py-0.5 items-center justify-center gap-1 rounded-full text-[9px] sm:text-[9.5px] font-semibold transition-colors cursor-pointer ${
                   decision === "approve"
                     ? "bg-ok text-white font-bold shadow-xs"
                     : "bg-white/15 text-white hover:bg-white/25"
                 }`}
               >
-                <IconCheck size={14} stroke={2.6} className="shrink-0 text-white" aria-hidden />
+                <IconCheck size={11} stroke={2.6} className="shrink-0 text-white" aria-hidden />
                 <span>{t.features.f1Approve}</span>
               </button>
               <button
                 type="button"
                 onClick={() => setDecision("voice")}
                 aria-pressed={decision === "voice"}
-                className={`flex min-h-[36px] sm:min-h-[40px] px-1 sm:px-2 py-1 items-center justify-center gap-1 rounded-full text-[11px] sm:text-[12px] font-semibold transition-colors cursor-pointer ${
+                className={`flex h-[26px] sm:h-[28px] px-1 sm:px-1.5 py-0.5 items-center justify-center gap-1 rounded-full text-[9px] sm:text-[9.5px] font-semibold transition-colors cursor-pointer ${
                   decision === "voice"
                     ? "bg-voice text-white font-bold shadow-xs"
                     : "bg-white/15 text-white hover:bg-white/25"
                 }`}
               >
-                <IconMicrophone size={14} className="shrink-0 text-white" aria-hidden />
+                <IconMicrophone size={11} className="shrink-0 text-white" aria-hidden />
                 <span>{t.features.f1Reply}</span>
               </button>
               <button
                 type="button"
                 onClick={() => setDecision("reject")}
                 aria-pressed={decision === "reject"}
-                className={`flex min-h-[36px] sm:min-h-[40px] px-1 sm:px-2 py-1 items-center justify-center gap-1 rounded-full text-[11px] sm:text-[12px] font-semibold transition-colors cursor-pointer ${
+                className={`flex h-[26px] sm:h-[28px] px-1 sm:px-1.5 py-0.5 items-center justify-center gap-1 rounded-full text-[9px] sm:text-[9.5px] font-semibold transition-colors cursor-pointer ${
                   decision === "reject"
                     ? "bg-stop text-white font-bold shadow-xs"
                     : "bg-white/15 text-white hover:bg-white/25"
                 }`}
               >
-                <IconX size={14} stroke={2.6} className="shrink-0 text-white" aria-hidden />
+                <IconX size={11} stroke={2.6} className="shrink-0 text-white" aria-hidden />
                 <span>{t.features.f1Reject}</span>
               </button>
             </div>

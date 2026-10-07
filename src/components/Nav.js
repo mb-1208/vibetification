@@ -13,20 +13,33 @@ import { EASE } from "./motion";
 import { useLanguage } from "./LanguageContext";
 
 export function LogoSymbol({ size = "md", className = "" }) {
+  const is2Xs = size === "2xs";
   const isXs = size === "xs";
   const isSm = size === "sm";
-  const dim = isXs
+  const dim = is2Xs
+    ? "h-2.5 w-2.5 rounded-[3.2px]"
+    : isXs
     ? "h-3.5 w-3.5 rounded-[4.5px]"
     : isSm
     ? "h-5 w-5 rounded-[6.5px]"
     : "h-7 w-7 rounded-[9px]";
-  const font = isXs ? "text-[10px]" : isSm ? "text-[14px]" : "text-[20px]";
-  const dot = isXs
+  const font = is2Xs
+    ? "text-[7.5px]"
+    : isXs
+    ? "text-[10px]"
+    : isSm
+    ? "text-[14px]"
+    : "text-[20px]";
+  const dot = is2Xs
+    ? "top-[1px] -right-[0.2px] h-[1.3px] w-[1.3px] ring-[0.4px]"
+    : isXs
     ? "top-[1.6px] -right-[0.2px] h-[1.8px] w-[1.8px] ring-[0.6px]"
     : isSm
     ? "top-[2.5px] -right-[0.3px] h-[2.5px] w-[2.5px] ring-[0.8px]"
     : "top-[3.8px] -right-[0.5px] h-[3.5px] w-[3.5px] ring-[1px]";
-  const shift = isXs
+  const shift = is2Xs
+    ? "translate-x-[0.1px] -translate-y-[0.1px]"
+    : isXs
     ? "translate-x-[0.2px] -translate-y-[0.2px]"
     : isSm
     ? "translate-x-[0.3px] -translate-y-[0.3px]"
