@@ -10,11 +10,11 @@ import { useLanguage } from "./LanguageContext";
 
 export default function Hero() {
   const [state, setState] = useState("waiting");
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
 
   return (
     <section id="top" className="relative isolate pt-32 sm:pt-40">
-      <Aura state={state} className="-z-10 h-[1100px]" />
+      <Aura state={state} className="-z-10 h-[760px] sm:h-[1100px]" />
 
       <div className="mx-auto max-w-[1240px] px-5 sm:px-8">
         <div className="mx-auto flex max-w-[980px] flex-col items-center text-center">
@@ -29,7 +29,7 @@ export default function Hero() {
           </motion.p>
 
           {/* H1 Main Headline */}
-          <h1 className="type-display mt-6 text-[clamp(3.1rem,9vw,8.4rem)] text-ink">
+          <h1 key={lang} className="type-display mt-6 text-[clamp(3.1rem,9vw,8.4rem)] text-ink">
             <SplitWords inView={false} delay={0.3} stagger={0.07}>
               {t.hero.h1Lead}
               <span className="type-serif">{t.hero.h1Serif1}</span>
@@ -40,9 +40,9 @@ export default function Hero() {
 
           {/* Sub-Headline */}
           <motion.p
-            initial={{ opacity: 0, y: 14, filter: "blur(6px)" }}
-            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-            transition={{ duration: 0.9, ease: EASE, delay: 0.75 }}
+            initial={{ opacity: 0, y: 14 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: EASE, delay: 0.6 }}
             className="mt-8 max-w-[640px] text-[17px] leading-[1.6] text-ink-2 sm:text-[19px]"
           >
             {t.hero.subheadline}

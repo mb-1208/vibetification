@@ -27,6 +27,10 @@ export default function Aura({ state = "waiting", className = "" }) {
   const y2 = useTransform(sy, (v) => v * -30);
 
   useEffect(() => {
+    // Only attach interactive mouse physics on desktop screens with hover capability
+    if (typeof window === "undefined" || !window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+      return;
+    }
     const onMove = (e) => {
       mx.set(e.clientX / window.innerWidth - 0.5);
       my.set(e.clientY / window.innerHeight - 0.5);
@@ -38,29 +42,47 @@ export default function Aura({ state = "waiting", className = "" }) {
   const colorT = { duration: 1.4, ease: [0.22, 1, 0.36, 1] };
 
   return (
-    <div aria-hidden className={`pointer-events-none absolute inset-0 overflow-hidden grain ${className}`}>
-      <motion.div style={{ x: x1, y: y1 }} className="absolute left-1/2 top-[-18%] h-[70vmax] w-[70vmax] -translate-x-1/2">
-        <motion.div
-          className="h-full w-full rounded-full opacity-70 blur-[90px]"
-          animate={{ backgroundColor: a, scale: [1, 1.08, 1], rotate: [0, 20, 0] }}
-          transition={{ backgroundColor: colorT, scale: { duration: 16, repeat: Infinity, ease: "easeInOut" }, rotate: { duration: 22, repeat: Infinity, ease: "easeInOut" } }}
-          style={{ borderRadius: "46% 54% 60% 40% / 50% 42% 58% 50%" }}
-        />
-      </motion.div>
-      <motion.div style={{ x: x2, y: y2 }} className="absolute left-[8%] top-[6%] h-[44vmax] w-[44vmax]">
-        <motion.div
-          className="h-full w-full rounded-full opacity-60 blur-[100px]"
-          animate={{ backgroundColor: b, x: [0, 60, 0], y: [0, 30, 0] }}
-          transition={{ backgroundColor: colorT, x: { duration: 19, repeat: Infinity, ease: "easeInOut" }, y: { duration: 14, repeat: Infinity, ease: "easeInOut" } }}
-        />
-      </motion.div>
-      <motion.div style={{ x: x2, y: y1 }} className="absolute right-[2%] top-[14%] h-[40vmax] w-[40vmax]">
-        <motion.div
-          className="h-full w-full rounded-full opacity-70 blur-[110px]"
-          animate={{ backgroundColor: c, x: [0, -50, 0], y: [0, 40, 0] }}
-          transition={{ backgroundColor: colorT, x: { duration: 21, repeat: Infinity, ease: "easeInOut" }, y: { duration: 17, repeat: Infinity, ease: "easeInOut" } }}
-        />
-      </motion.div>
+    <div
+      aria-hidden
+      className={`pointer-events-none absolute inset-0 overflow-hidden grain ${className}`}
+      style={{ contain: "paint" }}
+    >
+      {/* MOBILE: Ultra-lightweight native CSS radial-gradient (120fps smooth scrolling, zero blur pass overhead) */}
+      <div
+        className="sm:hidden absolute inset-0 transition-all duration-1000 ease-out"
+        style={{
+          background: `radial-gradient(circle 320px at 50% 25%, ${a}88 0%, ${b}30 50%, transparent 80%)`,
+        }}
+      />
+
+      {/* DESKTOP: Dynamic floating multi-orb aura */}
+      <div className="hidden sm:block absolute inset-0">
+        <motion.div style={{ x: x1, y: y1 }} className="absolute left-1/2 top-[-18%] h-[70vmax] w-[70vmax] -translate-x-1/2 will-change-transform">
+          <motion.div
+            className="h-full w-full rounded-full opacity-70 blur-[75px]"
+            animate={{ backgroundColor: a, scale: [1, 1.06, 1], rotate: [0, 15, 0] }}
+            transition={{ backgroundColor: colorT, scale: { duration: 16, repeat: Infinity, ease: "easeInOut" }, rotate: { duration: 22, repeat: Infinity, ease: "easeInOut" } }}
+            style={{ borderRadius: "46% 54% 60% 40% / 50% 42% 58% 50%", transform: "translateZ(0)" }}
+          />
+        </motion.div>
+        <motion.div style={{ x: x2, y: y2 }} className="absolute left-[8%] top-[6%] h-[44vmax] w-[44vmax] will-change-transform">
+          <motion.div
+            className="h-full w-full rounded-full opacity-60 blur-[80px]"
+            animate={{ backgroundColor: b, x: [0, 45, 0], y: [0, 25, 0] }}
+            transition={{ backgroundColor: colorT, x: { duration: 19, repeat: Infinity, ease: "easeInOut" }, y: { duration: 14, repeat: Infinity, ease: "easeInOut" } }}
+            style={{ transform: "translateZ(0)" }}
+          />
+        </motion.div>
+        <motion.div style={{ x: x2, y: y1 }} className="absolute right-[2%] top-[14%] h-[40vmax] w-[40vmax] will-change-transform">
+          <motion.div
+            className="h-full w-full rounded-full opacity-70 blur-[85px]"
+            animate={{ backgroundColor: c, x: [0, -40, 0], y: [0, 30, 0] }}
+            transition={{ backgroundColor: colorT, x: { duration: 21, repeat: Infinity, ease: "easeInOut" }, y: { duration: 17, repeat: Infinity, ease: "easeInOut" } }}
+            style={{ transform: "translateZ(0)" }}
+          />
+        </motion.div>
+      </div>
+
       {/* Fade the aura into the paper so it never fights the content below */}
       <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-b from-transparent to-paper" />
     </div>

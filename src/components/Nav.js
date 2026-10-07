@@ -105,7 +105,7 @@ export default function Nav() {
         <div
           className={`relative mx-auto flex max-w-[1240px] items-center justify-between rounded-full py-2 pl-5 pr-2 transition-[background-color,box-shadow,backdrop-filter] duration-500 ${
             scrolled
-              ? "bg-paper/85 shadow-[0_0_0_1px_rgb(14_14_16/0.07),0_12px_32px_-18px_rgb(14_14_16/0.35)] backdrop-blur-xl backdrop-saturate-150"
+              ? "bg-paper/90 shadow-[0_0_0_1px_rgb(14_14_16/0.07),0_12px_32px_-18px_rgb(14_14_16/0.35)] backdrop-blur-md sm:backdrop-blur-xl sm:backdrop-saturate-150"
               : "bg-transparent"
           }`}
         >

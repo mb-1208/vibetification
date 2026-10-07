@@ -23,7 +23,7 @@ import { SplitWords, Reveal, SectionIndex, EASE } from "./motion";
 import { useLanguage } from "./LanguageContext";
 
 export default function Features() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const [active, setActive] = useState(0);
   const itemRefs = useRef([]);
 
@@ -110,11 +110,11 @@ export default function Features() {
   const ActiveVisual = features[active]?.Visual || features[0].Visual;
 
   return (
-    <section id="features" className="relative scroll-mt-24 bg-paper-2/60 py-28 sm:py-40 overflow-hidden">
+    <section id="features" className="relative scroll-mt-24 bg-paper-2/60 py-28 sm:py-40">
       <div className="mx-auto max-w-[1240px] px-5 sm:px-8">
         <div className="max-w-[860px]">
           <SectionIndex n="02">{t.features.sectionIndex}</SectionIndex>
-          <h2 className="type-heading mt-8 text-[clamp(2.3rem,5vw,4.6rem)] text-ink">
+          <h2 key={lang} className="type-heading mt-8 text-[clamp(2.3rem,5vw,4.6rem)] text-ink">
             <SplitWords>
               {t.features.headingStart}
               <span className="type-serif">{t.features.headingSerif1}</span>
@@ -144,7 +144,7 @@ export default function Features() {
           </div>
 
           {/* Desktop: sticky stage swapping visuals smoothly */}
-          <div className="hidden lg:block">
+          <div className="hidden lg:block relative">
             <div className="sticky top-28 h-[calc(100vh-9rem)] max-h-[720px]">
               <Stage tint={features[active]?.tint || "#10b981"}>
                 <AnimatePresence mode="wait">

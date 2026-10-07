@@ -17,7 +17,7 @@ export const TRANSLATIONS = {
       menuOpen: "Buka menu",
     },
     hero: {
-      pillBadge: "Private Alpha: Dibangun untuk Claude Code, Cursor, & Agent Otonom",
+      pillBadge: "Private Alpha: Dibangun untuk Claude Code, Gemini, Cursor, & Agent Otonom",
       h1Lead: "Stop babysitting your ",
       h1Serif1: "coding",
       h1Serif2: "agents.",
@@ -173,11 +173,14 @@ export const TRANSLATIONS = {
       statusNote: "Preferensi disimpan otomatis ke antrean alpha pribadimu.",
       requireSurveyAlert:
         "Silakan pilih minimal 1 Agent dan 1 Device untuk melanjutkan pendaftaran.",
-      successQueue: (n) =>
-        `Kamu berada di antrean #${n}. Batch pertama Private Alpha akan dibuka bertahap.`,
-      shareBtn: "Bagikan Link Unik ke Teman Developer",
+      invalidEmailAlert: "Masukkan alamat email yang valid, contoh: nama@perusahaan.com",
+      submitFailedAlert: "Gagal mengirim data. Silakan coba beberapa saat lagi.",
+      successTitle: "Pendaftaran Berhasil!",
+      successDesc:
+        "Terima kasih telah mendaftar! Email dan preferensi integrasimu sudah tersimpan. Undangan akses Private Alpha akan kami kirimkan ke emailmu begitu batch berikutnya dibuka.",
+      shareBtn: "Bagikan ke Teman Developer",
       copiedText: "Link tersalin!",
-      jumpQueue: "untuk melompat 10 antrean.",
+      jumpQueue: "Ajak rekan developermu untuk mencoba bersama.",
     },
     footer: {
       tagline: "Stop babysitting your coding agents.",
@@ -255,7 +258,7 @@ export const TRANSLATIONS = {
       menuOpen: "Open menu",
     },
     hero: {
-      pillBadge: "Private Alpha: Built for Claude Code, Cursor, & Autonomous Agents",
+      pillBadge: "Private Alpha: Built for Claude Code, Gemini, Cursor, & Autonomous Agents",
       h1Lead: "Stop babysitting your ",
       h1Serif1: "coding",
       h1Serif2: "agents.",
@@ -411,11 +414,14 @@ export const TRANSLATIONS = {
       statusNote: "Preferences automatically saved to your private alpha queue.",
       requireSurveyAlert:
         "Please select at least 1 Agent and 1 Device to complete your registration.",
-      successQueue: (n) =>
-        `You are queued at #${n}. Batch 1 of Private Alpha will roll out in waves.`,
-      shareBtn: "Share Unique Link with Developer Friends",
+      invalidEmailAlert: "Please enter a valid developer email, e.g. name@company.com",
+      submitFailedAlert: "Failed to submit. Please try again later.",
+      successTitle: "Registration Confirmed!",
+      successDesc:
+        "Thank you for signing up! Your email and integration preferences have been recorded. We will send your Private Alpha invite as the next batch opens.",
+      shareBtn: "Share with Fellow Developers",
       copiedText: "Link copied!",
-      jumpQueue: "to jump 10 queue spots.",
+      jumpQueue: "Invite your developer teammates to build together.",
     },
     footer: {
       tagline: "Stop babysitting your coding agents.",

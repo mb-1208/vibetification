@@ -8,7 +8,7 @@ export const EASE = [0.22, 1, 0.36, 1];
  * Headline reveal: each word rises out of its own clipping mask.
  * Used only on section headlines so the eye is led to the one line that matters.
  */
-export function SplitWords({ children, className = "", delay = 0, stagger = 0.055, as = "span", inView = true }) {
+export function SplitWords({ children, className = "", delay = 0, stagger = 0.045, as = "span", inView = true }) {
   const MotionTag = motion[as] || motion.span;
   const parts = Array.isArray(children) ? children : [children];
 
@@ -19,34 +19,36 @@ export function SplitWords({ children, className = "", delay = 0, stagger = 0.05
       part.split(/(\s+)/).forEach((w, wi) => {
         if (w.trim() === "") {
           if (w.length) tokens.push({ space: true, key: `s-${pi}-${wi}` });
-        } else tokens.push({ node: w, key: `w-${pi}-${wi}` });
+        } else tokens.push({ node: w, text: w, key: `w-${pi}-${wi}-${w}` });
       });
     } else if (part) {
-      tokens.push({ node: part, key: `n-${pi}` });
+      tokens.push({ node: part, text: String(pi), key: `n-${pi}` });
     }
   });
 
+  // Unique signature so whenever language changes, the container remounts with 100% visible children
+  const textSignature = tokens.map((t) => t.text || " ").join("");
+
   let index = 0;
   const trigger = inView
-    ? { initial: "hidden", whileInView: "show", viewport: { once: true, amount: 0.6 } }
+    ? { initial: "hidden", whileInView: "show", viewport: { once: true, amount: 0.15 } }
     : { initial: "hidden", animate: "show" };
 
   return (
-    <MotionTag className={className} {...trigger} aria-label={undefined}>
+    <MotionTag key={textSignature} className={className} {...trigger} aria-label={undefined}>
       {tokens.map((t) => {
         if (t.space) return <span key={t.key}> </span>;
         const i = index++;
         return (
-          <span key={t.key} className="inline-block overflow-hidden px-[0.2em] -mx-[0.2em] pt-[0.12em] -mt-[0.12em] pb-[0.28em] -mb-[0.28em] align-bottom">
+          <span key={t.key} className="inline-block overflow-hidden px-[0.18em] -mx-[0.18em] pt-[0.12em] -mt-[0.12em] pb-[0.25em] -mb-[0.25em] align-bottom">
             <motion.span
-              className="inline-block will-change-transform pr-[0.12em]"
+              className="inline-block will-change-transform pr-[0.1em]"
               variants={{
-                hidden: { y: "105%", rotate: 4, opacity: 0 },
+                hidden: { y: "105%", opacity: 0 },
                 show: {
                   y: "0%",
-                  rotate: 0,
                   opacity: 1,
-                  transition: { duration: 0.9, ease: EASE, delay: delay + i * stagger },
+                  transition: { duration: 0.75, ease: EASE, delay: delay + i * stagger },
                 },
               }}
             >

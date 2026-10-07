@@ -45,16 +45,6 @@ export default function Footer() {
                 {t.footer.tagline}
               </span>
             </div>
-
-            <div className="flex items-center gap-2.5 rounded-full bg-paper px-4 py-2 ring-1 ring-line">
-              <span className="relative flex h-2 w-2">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-ok opacity-75" />
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-ok" />
-              </span>
-              <span className="type-label text-[12px] font-medium text-ok-ink">
-                {t.footer.statusOperational}
-              </span>
-            </div>
           </div>
 
           {/* Links Columns */}

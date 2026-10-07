@@ -6,7 +6,7 @@ import { SplitWords, Reveal, SectionIndex } from "./motion";
 import { useLanguage } from "./LanguageContext";
 
 export default function Workflow() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
 
   const comparisons = [
     {
@@ -40,7 +40,7 @@ export default function Workflow() {
       <div className="mx-auto max-w-[1240px] px-5 sm:px-8">
         <div className="max-w-[860px]">
           <SectionIndex n="03">{t.workflow.sectionIndex}</SectionIndex>
-          <h2 className="type-heading mt-8 text-[clamp(2.3rem,4.8vw,4.4rem)] text-ink">
+          <h2 key={lang} className="type-heading mt-8 text-[clamp(2.3rem,4.8vw,4.4rem)] text-ink">
             <SplitWords>
               {t.workflow.headingStart}
               <span className="type-serif">{t.workflow.headingSerif1}</span>

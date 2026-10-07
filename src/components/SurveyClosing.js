@@ -22,7 +22,7 @@ const DEVICE_OPTIONS = [
 
 export default function SurveyClosing() {
   const { agents, devices, toggleAgent, toggleDevice, surveyPrompted } = useWaitlist();
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
 
   return (
     <section id="survey" className="relative scroll-mt-24 py-28 sm:py-40">
@@ -33,7 +33,7 @@ export default function SurveyClosing() {
 
           {/* CLOSING SECTION COPY */}
           <div className="mt-8">
-            <h2 className="type-heading text-[clamp(2.4rem,5.2vw,4.8rem)] text-ink">
+            <h2 key={lang} className="type-heading text-[clamp(2.4rem,5.2vw,4.8rem)] text-ink">
               <SplitWords>
                 {t.survey.headingStart}
                 <span className="type-serif pr-[0.1em]">{t.survey.headingSerif}</span>

@@ -31,11 +31,7 @@ export function WaitlistProvider({ children }) {
     const valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(targetEmail);
     if (!valid) {
       setStatus("error");
-      setError(
-        t?.hero?.emailPlaceholder === "name@company.com"
-          ? "Please enter a valid developer email, e.g. name@company.com"
-          : "Masukkan alamat email yang valid, contoh: nama@perusahaan.com"
-      );
+      setError("invalid_email");
       return;
     }
 
@@ -56,20 +52,13 @@ export function WaitlistProvider({ children }) {
     const valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(targetEmail);
     if (!valid) {
       setStatus("error");
-      setError(
-        t?.hero?.emailPlaceholder === "name@company.com"
-          ? "Please enter a valid developer email, e.g. name@company.com"
-          : "Masukkan alamat email yang valid, contoh: nama@perusahaan.com"
-      );
+      setError("invalid_email");
       return;
     }
 
     if (!agents.length || !devices.length) {
       setStatus("error");
-      setError(
-        t?.survey?.requireSurveyAlert ||
-          "Silakan pilih minimal 1 Agent dan 1 Device untuk melanjutkan pendaftaran."
-      );
+      setError("require_survey");
       return;
     }
 
@@ -90,7 +79,7 @@ export function WaitlistProvider({ children }) {
 
       const data = await res.json();
       if (!res.ok) {
-        throw new Error(data.error || "Gagal mengirim formulir.");
+        throw new Error(data.error || "submit_failed");
       }
 
       setStatus("success");
@@ -98,10 +87,9 @@ export function WaitlistProvider({ children }) {
       console.error("Waitlist submit error:", err);
       setStatus("error");
       setError(
-        err.message ||
-          (t?.hero?.emailPlaceholder === "name@company.com"
-            ? "Failed to submit. Please try again later."
-            : "Gagal mengirim data. Silakan coba beberapa saat lagi.")
+        err?.message && !err.message.includes("fetch") && !err.message.includes("Failed")
+          ? err.message
+          : "submit_failed"
       );
     }
   };
@@ -162,6 +150,14 @@ export function WaitlistForm({ id, source = "hero", tone = "light" }) {
     } else {
       submitSurvey();
     }
+  };
+
+  const getErrorMessage = (code) => {
+    if (!code) return "";
+    if (code === "invalid_email") return t.survey.invalidEmailAlert;
+    if (code === "require_survey") return t.survey.requireSurveyAlert;
+    if (code === "submit_failed") return t.survey.submitFailedAlert;
+    return code;
   };
 
   return (
@@ -255,7 +251,7 @@ export function WaitlistForm({ id, source = "hero", tone = "light" }) {
             }`}
           >
             <IconAlertCircle size={15} aria-hidden />
-            <span>{error}</span>
+            <span>{getErrorMessage(error)}</span>
           </motion.p>
         )}
       </AnimatePresence>
@@ -278,7 +274,7 @@ export function SuccessCard({ tone }) {
   const dark = tone === "dark";
 
   const share = async () => {
-    const url = "https://vibetification.com/alpha?ref=mb10";
+    const url = "https://vibetification.com";
     try {
       await navigator.clipboard.writeText(url);
       setCopied(true);
@@ -310,8 +306,11 @@ export function SuccessCard({ tone }) {
           <IconCheck size={20} stroke={2.4} aria-hidden />
         </motion.span>
         <div className="min-w-0 flex-1">
-          <p className={`text-[17px] font-medium leading-snug ${dark ? "text-white" : "text-ink"}`}>
-            {t.survey.successQueue(128)}
+          <h4 className={`text-[17px] font-semibold leading-snug ${dark ? "text-white" : "text-ink"}`}>
+            {t.survey.successTitle}
+          </h4>
+          <p className={`mt-1.5 text-[14px] leading-relaxed ${dark ? "text-white/75" : "text-ink-2"}`}>
+            {t.survey.successDesc}
           </p>
           <div className="mt-4 flex flex-col gap-2.5 sm:flex-row sm:items-center sm:gap-3">
             <button

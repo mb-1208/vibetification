@@ -6,14 +6,14 @@ import { SplitWords, Reveal, SectionIndex, EASE } from "./motion";
 import { useLanguage } from "./LanguageContext";
 
 export default function Problem() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
 
   return (
     <section id="problem" className="relative scroll-mt-24 py-28 sm:py-40">
       <div className="mx-auto grid max-w-[1240px] gap-16 px-5 sm:px-8 lg:grid-cols-[5fr_7fr] lg:gap-20">
         <div className="lg:sticky lg:top-32 lg:self-start">
           <SectionIndex n="01">{t.problem.sectionIndex}</SectionIndex>
-          <h2 className="type-heading mt-8 text-[clamp(2.3rem,4.6vw,4.2rem)] text-ink">
+          <h2 key={lang} className="type-heading mt-8 text-[clamp(2.3rem,4.6vw,4.2rem)] text-ink">
             <SplitWords>
               {t.problem.headingStart}
               <span className="type-serif">{t.problem.headingSerif1}</span>
