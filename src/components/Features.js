@@ -324,13 +324,13 @@ function WristVisual() {
                 {t.features.f1WatchSubtitle}
               </p>
             </div>
-            {/* Buttons with generous padding and non-collapsing shrink-0 icons */}
-            <div className="grid grid-cols-2 gap-1.5 sm:gap-2">
+            {/* Buttons: 3 Actionable Buttons (Approve, Voice Reply, Reject) */}
+            <div className="grid grid-cols-3 gap-1 sm:gap-1.5">
               <button
                 type="button"
                 onClick={() => setDecision("approve")}
                 aria-pressed={decision === "approve"}
-                className={`flex min-h-[38px] sm:min-h-[42px] px-2.5 sm:px-3 py-1 sm:py-1.5 items-center justify-center gap-1 sm:gap-1.5 rounded-full text-[11px] sm:text-[12px] font-semibold transition-colors cursor-pointer ${
+                className={`flex min-h-[36px] sm:min-h-[40px] px-1 sm:px-2 py-1 items-center justify-center gap-1 rounded-full text-[11px] sm:text-[12px] font-semibold transition-colors cursor-pointer ${
                   decision === "approve"
                     ? "bg-ok text-white font-bold shadow-xs"
                     : "bg-white/15 text-white hover:bg-white/25"
@@ -341,9 +341,22 @@ function WristVisual() {
               </button>
               <button
                 type="button"
+                onClick={() => setDecision("voice")}
+                aria-pressed={decision === "voice"}
+                className={`flex min-h-[36px] sm:min-h-[40px] px-1 sm:px-2 py-1 items-center justify-center gap-1 rounded-full text-[11px] sm:text-[12px] font-semibold transition-colors cursor-pointer ${
+                  decision === "voice"
+                    ? "bg-voice text-white font-bold shadow-xs"
+                    : "bg-white/15 text-white hover:bg-white/25"
+                }`}
+              >
+                <IconMicrophone size={14} className="shrink-0 text-white" aria-hidden />
+                <span>{t.features.f1Reply}</span>
+              </button>
+              <button
+                type="button"
                 onClick={() => setDecision("reject")}
                 aria-pressed={decision === "reject"}
-                className={`flex min-h-[38px] sm:min-h-[42px] px-2.5 sm:px-3 py-1 sm:py-1.5 items-center justify-center gap-1 sm:gap-1.5 rounded-full text-[11px] sm:text-[12px] font-semibold transition-colors cursor-pointer ${
+                className={`flex min-h-[36px] sm:min-h-[40px] px-1 sm:px-2 py-1 items-center justify-center gap-1 rounded-full text-[11px] sm:text-[12px] font-semibold transition-colors cursor-pointer ${
                   decision === "reject"
                     ? "bg-stop text-white font-bold shadow-xs"
                     : "bg-white/15 text-white hover:bg-white/25"
@@ -369,6 +382,7 @@ function WristVisual() {
         <p className="text-[13px] text-ink-3" aria-live="polite">
           {count > 0 ? t.features.f1CountMsg(count) : t.features.f1DefaultMsg}
           {decision === "approve" && t.features.f1ApprovedMsg}
+          {decision === "voice" && t.features.f1VoiceMsg}
           {decision === "reject" && t.features.f1RejectedMsg}
         </p>
       </div>

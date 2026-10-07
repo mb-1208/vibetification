@@ -198,7 +198,7 @@ export default function Demo({ state, setState }) {
           {/* RIGHT: iPhone lock screen + Smartwatch */}
           <div className="relative flex items-center justify-center px-2 pb-10 pt-6 lg:px-6 lg:pb-6">
             <Phone state={state} phase={phase} act={act} />
-            <Watch state={state} phase={phase} />
+            <Watch state={state} phase={phase} act={act} />
           </div>
         </div>
       </div>
@@ -368,7 +368,7 @@ function Phone({ state, phase, act }) {
   );
 }
 
-function Watch({ state, phase }) {
+function Watch({ state, phase, act }) {
   const { t } = useLanguage();
   const voice = state === "voice";
   const buzz = phase === "notified" && state === "waiting";
@@ -387,7 +387,7 @@ function Watch({ state, phase }) {
           ? { duration: 0.55, repeat: 1, repeatDelay: 0.25 }
           : { duration: 0.4 }
       }
-      className="absolute left-0 top-[32%] w-[124px] sm:left-2 sm:w-[136px] lg:-left-8 lg:w-[144px]"
+      className="absolute left-0 top-[28%] w-[136px] sm:left-2 sm:w-[146px] lg:-left-8 lg:w-[154px]"
       style={{ rotate: -6 }}
     >
       {/* Green Haptic rings */}
@@ -406,7 +406,7 @@ function Watch({ state, phase }) {
       </AnimatePresence>
       <div className="relative rounded-[44px] bg-[#1a1a1c] p-[7px] shadow-[0_24px_50px_-20px_rgb(14_14_16/0.7),inset_0_0_0_1.5px_#3a3a3c]">
         <WatchBand />
-        <div className="flex aspect-[4/4.6] flex-col justify-between rounded-[37px] bg-black p-3.5 text-white">
+        <div className="flex aspect-[4/4.8] flex-col justify-between rounded-[37px] bg-black p-3 text-white">
           <div className="flex items-center justify-between text-[8.5px] text-white/60">
             <span className="flex items-center gap-1 text-white">
               <LogoSymbol size="xs" />
@@ -417,7 +417,8 @@ function Watch({ state, phase }) {
             </span>
             <span className="font-mono tabular-nums text-[8.5px] text-white/50">10:42</span>
           </div>
-          <div className="flex items-center gap-2">
+
+          <div className="my-auto flex items-center gap-1.5 py-0.5">
             <motion.span
               animate={{
                 backgroundColor: voice
@@ -428,41 +429,70 @@ function Watch({ state, phase }) {
                   ? "#e5484d"
                   : "#10b981",
               }}
-              className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-white"
+              className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-white"
             >
               {voice ? (
-                <IconMicrophone size={16} aria-hidden />
+                <IconMicrophone size={13} aria-hidden />
               ) : state === "aborted" ? (
-                <IconX size={16} aria-hidden />
+                <IconX size={13} stroke={2.6} aria-hidden />
               ) : (
-                <IconCheck size={16} stroke={2.4} aria-hidden />
+                <IconCheck size={13} stroke={2.4} aria-hidden />
               )}
             </motion.span>
-            <span className="text-[11.5px] font-semibold leading-tight">
-              Claude Code: 12 test passed
-            </span>
-          </div>
-          <div className="flex h-5 items-center justify-between">
-            <span className="text-[9.5px] leading-tight text-white/60">
-              {voice ? t.demo.watchSubtitleRecording : t.demo.watchSubtitleWaiting}
-            </span>
-            {voice && (
-              <span className="flex h-4 items-center gap-[2px]" aria-hidden>
-                {[0, 1, 2, 3, 4].map((i) => (
-                  <motion.span
-                    key={i}
-                    className="w-[3px] rounded-full bg-[#b9adff]"
-                    animate={{ height: [4, 14, 6, 12, 4] }}
-                    transition={{
-                      duration: 0.9,
-                      repeat: Infinity,
-                      delay: i * 0.1,
-                      ease: "easeInOut",
-                    }}
-                  />
-                ))}
+            <div className="min-w-0 flex-1">
+              <span className="block text-[10.5px] font-semibold leading-tight text-white truncate">
+                Claude Code
               </span>
-            )}
+              <span className="block text-[9px] text-emerald-400 font-mono leading-tight truncate">
+                {voice ? "Listening voice..." : "12 test passed"}
+              </span>
+            </div>
+          </div>
+
+          {/* Action Buttons on Wrist matching mobile lock screen */}
+          <div className="grid grid-cols-3 gap-1 pt-1.5 border-t border-white/[0.08]">
+            <motion.button
+              type="button"
+              whileTap={{ scale: 0.93 }}
+              onClick={() => act && act("approved")}
+              aria-pressed={state === "approved"}
+              className={`flex h-[25px] sm:h-[27px] items-center justify-center gap-0.5 rounded-full px-1 text-[8.5px] font-semibold transition-colors cursor-pointer ${
+                state === "approved"
+                  ? "bg-ok text-white shadow-xs"
+                  : "bg-white/15 text-white hover:bg-white/25"
+              }`}
+            >
+              <IconCheck size={10} stroke={2.8} className="shrink-0" aria-hidden />
+              <span>{t.features?.f1Approve || "Approve"}</span>
+            </motion.button>
+            <motion.button
+              type="button"
+              whileTap={{ scale: 0.93 }}
+              onClick={() => act && act("voice")}
+              aria-pressed={state === "voice"}
+              className={`flex h-[25px] sm:h-[27px] items-center justify-center gap-0.5 rounded-full px-1 text-[8.5px] font-semibold transition-colors cursor-pointer ${
+                state === "voice"
+                  ? "bg-voice text-white shadow-xs"
+                  : "bg-white/15 text-white hover:bg-white/25"
+              }`}
+            >
+              <IconMicrophone size={10} className="shrink-0" aria-hidden />
+              <span>{t.features?.f1Reply || "Reply"}</span>
+            </motion.button>
+            <motion.button
+              type="button"
+              whileTap={{ scale: 0.93 }}
+              onClick={() => act && act("aborted")}
+              aria-pressed={state === "aborted"}
+              className={`flex h-[25px] sm:h-[27px] items-center justify-center gap-0.5 rounded-full px-1 text-[8.5px] font-semibold transition-colors cursor-pointer ${
+                state === "aborted"
+                  ? "bg-stop text-white shadow-xs"
+                  : "bg-white/15 text-stop hover:bg-white/25"
+              }`}
+            >
+              <IconX size={10} stroke={2.8} className="shrink-0" aria-hidden />
+              <span>{t.demo?.btnAbort || "Abort"}</span>
+            </motion.button>
           </div>
         </div>
       </div>
