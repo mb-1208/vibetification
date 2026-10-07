@@ -331,7 +331,7 @@ function WristVisual() {
                 type="button"
                 onClick={() => setDecision("approve")}
                 aria-pressed={decision === "approve"}
-                className={`flex h-[26px] sm:h-[28px] px-1 sm:px-1.5 py-0.5 items-center justify-center gap-1 rounded-full text-[9px] sm:text-[9.5px] font-semibold transition-colors cursor-pointer ${
+                className={`flex h-[26px] sm:h-[28px] px-1 sm:px-1.5 py-0.5 items-center justify-center gap-1 overflow-hidden rounded-full text-[9px] sm:text-[9.5px] font-semibold whitespace-nowrap transition-colors cursor-pointer select-none ${
                   decision === "approve"
                     ? "bg-ok text-white font-bold shadow-xs"
                     : "bg-white/15 text-white hover:bg-white/25"
@@ -344,7 +344,7 @@ function WristVisual() {
                 type="button"
                 onClick={() => setDecision("voice")}
                 aria-pressed={decision === "voice"}
-                className={`flex h-[26px] sm:h-[28px] px-1 sm:px-1.5 py-0.5 items-center justify-center gap-1 rounded-full text-[9px] sm:text-[9.5px] font-semibold transition-colors cursor-pointer ${
+                className={`flex h-[26px] sm:h-[28px] px-1 sm:px-1.5 py-0.5 items-center justify-center gap-1 overflow-hidden rounded-full text-[9px] sm:text-[9.5px] font-semibold whitespace-nowrap transition-colors cursor-pointer select-none ${
                   decision === "voice"
                     ? "bg-voice text-white font-bold shadow-xs"
                     : "bg-white/15 text-white hover:bg-white/25"
@@ -357,7 +357,7 @@ function WristVisual() {
                 type="button"
                 onClick={() => setDecision("reject")}
                 aria-pressed={decision === "reject"}
-                className={`flex h-[26px] sm:h-[28px] px-1 sm:px-1.5 py-0.5 items-center justify-center gap-1 rounded-full text-[9px] sm:text-[9.5px] font-semibold transition-colors cursor-pointer ${
+                className={`flex h-[26px] sm:h-[28px] px-1 sm:px-1.5 py-0.5 items-center justify-center gap-1 overflow-hidden rounded-full text-[9px] sm:text-[9.5px] font-semibold whitespace-nowrap transition-colors cursor-pointer select-none ${
                   decision === "reject"
                     ? "bg-stop text-white font-bold shadow-xs"
                     : "bg-white/15 text-white hover:bg-white/25"

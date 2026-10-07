@@ -395,7 +395,7 @@ function Watch({ state, phase, act }) {
           ? { duration: 0.55, repeat: 1, repeatDelay: 0.25 }
           : { duration: 0.4 }
       }
-      className="absolute left-0 top-[28%] w-[136px] sm:left-2 sm:w-[146px] lg:-left-8 lg:w-[154px]"
+      className="absolute left-0 top-[28%] w-[148px] sm:left-2 sm:w-[158px] lg:-left-8 lg:w-[166px]"
       style={{ rotate: -6 }}
     >
       {/* Green Haptic rings */}
@@ -414,7 +414,7 @@ function Watch({ state, phase, act }) {
       </AnimatePresence>
       <div className="relative rounded-[44px] bg-[#1a1a1c] p-[7px] shadow-[0_24px_50px_-20px_rgb(14_14_16/0.7),inset_0_0_0_1.5px_#3a3a3c]">
         <WatchBand />
-        <div className="flex aspect-[4/4.8] flex-col justify-between overflow-hidden rounded-[37px] bg-black px-2.5 pt-2.5 pb-2.5 sm:px-3 sm:pt-3 sm:pb-3 text-white">
+        <div className="flex aspect-[4/4.8] flex-col justify-between overflow-hidden rounded-[37px] bg-black px-2 pt-2.5 pb-2.5 sm:px-2.5 sm:pt-3 sm:pb-3 text-white">
           <div className="flex items-center justify-between text-[7.5px] text-white/60">
             <span className="flex items-center gap-1 text-white">
               <LogoSymbol size="2xs" />
@@ -464,42 +464,54 @@ function Watch({ state, phase, act }) {
               whileTap={{ scale: 0.93 }}
               onClick={() => act && act("approved")}
               aria-pressed={state === "approved"}
-              className={`flex h-[19px] sm:h-[21px] items-center justify-center gap-0.5 rounded-full px-0.5 text-[6.8px] sm:text-[7.5px] font-semibold transition-colors cursor-pointer ${
+              className={`flex h-[18px] sm:h-[20px] items-center justify-center overflow-hidden rounded-full px-0.5 transition-colors cursor-pointer ${
                 state === "approved"
                   ? "bg-ok text-white shadow-xs"
                   : "bg-white/15 text-white hover:bg-white/25"
               }`}
             >
-              <IconCheck size={8} stroke={2.8} className="shrink-0" aria-hidden />
-              <span>{t.features?.f1Approve || "Approve"}</span>
+              <div className="flex items-center justify-center gap-[1.5px] scale-[0.6] sm:scale-[0.66] origin-center whitespace-nowrap">
+                <IconCheck size={9} stroke={3} className="shrink-0" aria-hidden />
+                <span className="text-[9px] font-bold tracking-tight leading-none select-none">
+                  {t.features?.f1Approve || "Approve"}
+                </span>
+              </div>
             </motion.button>
             <motion.button
               type="button"
               whileTap={{ scale: 0.93 }}
               onClick={() => act && act("voice")}
               aria-pressed={state === "voice"}
-              className={`flex h-[19px] sm:h-[21px] items-center justify-center gap-0.5 rounded-full px-0.5 text-[6.8px] sm:text-[7.5px] font-semibold transition-colors cursor-pointer ${
+              className={`flex h-[18px] sm:h-[20px] items-center justify-center overflow-hidden rounded-full px-0.5 transition-colors cursor-pointer ${
                 state === "voice"
                   ? "bg-voice text-white shadow-xs"
                   : "bg-white/15 text-white hover:bg-white/25"
               }`}
             >
-              <IconMicrophone size={8} className="shrink-0" aria-hidden />
-              <span>{t.features?.f1Reply || "Reply"}</span>
+              <div className="flex items-center justify-center gap-[1.5px] scale-[0.6] sm:scale-[0.66] origin-center whitespace-nowrap">
+                <IconMicrophone size={9} className="shrink-0" aria-hidden />
+                <span className="text-[9px] font-bold tracking-tight leading-none select-none">
+                  {t.features?.f1Reply || "Reply"}
+                </span>
+              </div>
             </motion.button>
             <motion.button
               type="button"
               whileTap={{ scale: 0.93 }}
               onClick={() => act && act("aborted")}
               aria-pressed={state === "aborted"}
-              className={`flex h-[19px] sm:h-[21px] items-center justify-center gap-0.5 rounded-full px-0.5 text-[6.8px] sm:text-[7.5px] font-semibold transition-colors cursor-pointer ${
+              className={`flex h-[18px] sm:h-[20px] items-center justify-center overflow-hidden rounded-full px-0.5 transition-colors cursor-pointer ${
                 state === "aborted"
                   ? "bg-stop text-white shadow-xs"
                   : "bg-white/15 text-stop hover:bg-white/25"
               }`}
             >
-              <IconX size={8} stroke={2.8} className="shrink-0" aria-hidden />
-              <span>{t.features?.f1Reject || "Reject"}</span>
+              <div className="flex items-center justify-center gap-[1.5px] scale-[0.6] sm:scale-[0.66] origin-center whitespace-nowrap">
+                <IconX size={9} stroke={3} className="shrink-0" aria-hidden />
+                <span className="text-[9px] font-bold tracking-tight leading-none select-none">
+                  {t.features?.f1Reject || "Reject"}
+                </span>
+              </div>
             </motion.button>
           </div>
         </div>
