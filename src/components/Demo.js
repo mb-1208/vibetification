@@ -387,7 +387,7 @@ function Watch({ state, phase }) {
           ? { duration: 0.55, repeat: 1, repeatDelay: 0.25 }
           : { duration: 0.4 }
       }
-      className="absolute bottom-10 left-0 w-[152px] sm:left-2 lg:-left-6 lg:bottom-14"
+      className="absolute left-0 top-[32%] w-[124px] sm:left-2 sm:w-[136px] lg:-left-8 lg:w-[144px]"
       style={{ rotate: -6 }}
     >
       {/* Green Haptic rings */}

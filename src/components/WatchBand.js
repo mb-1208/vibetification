@@ -5,7 +5,7 @@
 */
 export default function WatchBand({ size = "md" }) {
   const lg = size === "lg";
-  const strapH = lg ? "h-[92px]" : "h-[46px]";
+  const strapH = lg ? "h-[92px]" : "h-[38px]";
   const strapW = lg ? "w-[64%]" : "w-[62%]";
   const radius = lg ? "rounded-[22px]" : "rounded-[12px]";
 
