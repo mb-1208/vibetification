@@ -163,7 +163,7 @@ export function WaitlistForm({ id, source = "hero", tone = "light" }) {
   return (
     <form noValidate onSubmit={handleSubmit} className="w-full">
       <div
-        className={`group relative flex flex-col gap-2.5 rounded-[24px] p-2 transition-shadow duration-300 sm:flex-row sm:items-center sm:gap-2 sm:rounded-full sm:p-1.5 ${
+        className={`group relative flex flex-col gap-2 rounded-[24px] p-2 transition-shadow duration-300 sm:flex-row sm:items-center sm:gap-2 sm:rounded-full sm:p-1.5 ${
           dark
             ? "bg-white/[0.06] ring-1 ring-white/15 focus-within:ring-white/40"
             : "bg-card ring-1 ring-line-strong shadow-[0_1px_0_rgb(255_255_255/0.8)_inset,0_18px_40px_-24px_rgb(14_14_16/0.25)] focus-within:ring-ok/50"
@@ -190,7 +190,7 @@ export function WaitlistForm({ id, source = "hero", tone = "light" }) {
           placeholder={t.hero.emailPlaceholder}
           aria-invalid={status === "error"}
           aria-describedby={`${id}-hint`}
-          className={`h-14 min-w-0 flex-1 bg-transparent px-5 text-[16px] focus:outline-none sm:h-12 sm:px-5 sm:text-[15px] ${
+          className={`h-[54px] min-h-[54px] w-full min-w-0 bg-transparent px-5 text-[16px] focus:outline-none sm:h-12 sm:min-h-0 sm:w-auto sm:flex-1 sm:text-[15px] ${
             dark ? "text-white placeholder:text-white/45" : "text-ink placeholder:text-ink-3"
           }`}
         />
@@ -198,7 +198,7 @@ export function WaitlistForm({ id, source = "hero", tone = "light" }) {
           type="submit"
           disabled={status === "loading"}
           whileTap={{ scale: 0.98 }}
-          className={`relative inline-flex h-13 shrink-0 items-center justify-center gap-2 overflow-hidden rounded-full px-6 text-[15px] font-medium transition-colors disabled:cursor-wait cursor-pointer sm:h-12 ${
+          className={`relative inline-flex h-[52px] w-full shrink-0 items-center justify-center gap-2 overflow-hidden rounded-full px-6 text-[15px] font-medium transition-colors disabled:cursor-wait cursor-pointer sm:h-12 sm:w-auto ${
             dark
               ? "bg-white text-ink hover:bg-white/90"
               : "bg-ink text-white hover:bg-[#25252a]"

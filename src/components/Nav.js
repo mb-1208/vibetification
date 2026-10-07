@@ -12,24 +12,45 @@ import { IconMenu2, IconX } from "@tabler/icons-react";
 import { EASE } from "./motion";
 import { useLanguage } from "./LanguageContext";
 
+export function LogoSymbol({ size = "md", className = "" }) {
+  const isSm = size === "sm";
+  return (
+    <span
+      className={`relative flex shrink-0 items-center justify-center bg-emerald-500 text-white shadow-[0_2px_8px_-2px_rgba(16,185,129,0.35)] transition-transform duration-200 group-hover:scale-105 ${
+        isSm ? "h-5 w-5 rounded-[6.5px]" : "h-7 w-7 rounded-[9px]"
+      } ${className}`}
+    >
+      <span
+        className={`relative inline-flex items-center justify-center ${
+          isSm ? "translate-x-[0.3px] -translate-y-[0.3px]" : "translate-x-[0.5px] -translate-y-[0.5px]"
+        }`}
+      >
+        <span
+          className={`type-serif italic font-normal leading-none select-none ${
+            isSm ? "text-[14px]" : "text-[20px]"
+          }`}
+        >
+          v
+        </span>
+        {/* Notification dot nestled with background-colored knockout ring */}
+        <span
+          aria-hidden
+          className={`absolute shrink-0 aspect-square rounded-full bg-white ring-emerald-500 ${
+            isSm
+              ? "top-[2.5px] -right-[0.3px] h-[2.5px] w-[2.5px] ring-[0.8px]"
+              : "top-[3.8px] -right-[0.5px] h-[3.5px] w-[3.5px] ring-[1px]"
+          }`}
+        />
+      </span>
+    </span>
+  );
+}
+
 export function Wordmark({ className = "" }) {
   const { t } = useLanguage();
   return (
     <span className={`inline-flex items-center gap-2.5 ${className}`}>
-      {/* Primary Green Rounded Square Logo Symbol with 'v' and notification dot */}
-      <span className="relative flex h-7 w-7 shrink-0 items-center justify-center rounded-[9px] bg-emerald-500 text-white shadow-[0_2px_8px_-2px_rgba(16,185,129,0.35)] transition-transform duration-200 group-hover:scale-105">
-        <span className="relative inline-flex items-center justify-center translate-x-[0.5px] -translate-y-[0.5px]">
-          <span className="type-serif italic font-normal text-[20px] leading-none select-none">
-            v
-          </span>
-          {/* Notification dot nestled with background-colored knockout ring */}
-          <span
-            aria-hidden
-            className="absolute top-[3.8px] -right-[0.5px] h-[3.5px] w-[3.5px] shrink-0 aspect-square rounded-full bg-white ring-[1px] ring-emerald-500"
-          />
-        </span>
-      </span>
-
+      <LogoSymbol />
       <span className="inline-flex items-baseline gap-2">
         <span
           className="text-[20px] font-semibold tracking-[-0.03em] text-ink flex items-baseline"

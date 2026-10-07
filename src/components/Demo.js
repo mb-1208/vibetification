@@ -16,6 +16,7 @@ import {
 import { EASE } from "./motion";
 import { AURA } from "./Aura";
 import { useLanguage } from "./LanguageContext";
+import { LogoSymbol } from "./Nav";
 
 const LOGS_BY_LANG = {
   id: {
@@ -289,13 +290,19 @@ function Phone({ state, phase, act }) {
                   className="overflow-hidden rounded-[24px] bg-white/80 p-3.5 text-ink shadow-[0_10px_30px_-12px_rgb(0_0_0/0.35)] backdrop-blur-xl backdrop-saturate-150"
                 >
                   <div className="flex items-center justify-between text-[11px] text-ink-2">
-                    <span className="flex items-center gap-1.5 font-semibold tracking-wide text-ink">
-                      <span className="flex h-5 w-5 items-center justify-center rounded-md bg-ink text-[10px] font-bold text-white">
-                        v
+                    <span className="flex items-center gap-1.5 text-ink">
+                      <LogoSymbol size="sm" />
+                      <span
+                        className="flex items-baseline text-[12.5px] font-semibold tracking-[-0.03em] text-ink"
+                        style={{ fontVariationSettings: '"wdth" 92' }}
+                      >
+                        <span className="type-serif italic font-normal text-[14px] tracking-normal pr-[0.04em] text-ink">
+                          vibe
+                        </span>
+                        <span>tification</span>
                       </span>
-                      <span>VIBETIFICATION</span>
                     </span>
-                    <span>{t.demo.justNow}</span>
+                    <span className="text-[11px] font-medium text-ink-3">{t.demo.justNow}</span>
                   </div>
                   <div className="mt-2 text-[14px] font-semibold leading-tight">
                     {t.demo.phoneNotifTitle}
