@@ -407,12 +407,15 @@ function Watch({ state, phase }) {
       <div className="relative rounded-[44px] bg-[#1a1a1c] p-[7px] shadow-[0_24px_50px_-20px_rgb(14_14_16/0.7),inset_0_0_0_1.5px_#3a3a3c]">
         <WatchBand />
         <div className="flex aspect-[4/4.6] flex-col justify-between rounded-[37px] bg-black p-3.5 text-white">
-          <div className="flex items-center justify-between text-[10px] text-white/60">
-            <span className="flex items-center gap-1 font-mono">
-              <IconDeviceWatch size={12} aria-hidden />
-              Wrist
+          <div className="flex items-center justify-between text-[8.5px] text-white/60">
+            <span className="flex items-center gap-1 text-white">
+              <LogoSymbol size="xs" />
+              <span className="flex items-baseline text-[8.5px] font-semibold tracking-[-0.03em]" style={{ fontVariationSettings: '"wdth" 92' }}>
+                <span className="type-serif italic font-normal text-[10px] tracking-normal pr-[0.02em]">vibe</span>
+                <span>tification</span>
+              </span>
             </span>
-            <span>10:42</span>
+            <span className="font-mono tabular-nums text-[8.5px] text-white/50">10:42</span>
           </div>
           <div className="flex items-center gap-2">
             <motion.span

@@ -13,33 +13,37 @@ import { EASE } from "./motion";
 import { useLanguage } from "./LanguageContext";
 
 export function LogoSymbol({ size = "md", className = "" }) {
+  const isXs = size === "xs";
   const isSm = size === "sm";
+  const dim = isXs
+    ? "h-3.5 w-3.5 rounded-[4.5px]"
+    : isSm
+    ? "h-5 w-5 rounded-[6.5px]"
+    : "h-7 w-7 rounded-[9px]";
+  const font = isXs ? "text-[10px]" : isSm ? "text-[14px]" : "text-[20px]";
+  const dot = isXs
+    ? "top-[1.6px] -right-[0.2px] h-[1.8px] w-[1.8px] ring-[0.6px]"
+    : isSm
+    ? "top-[2.5px] -right-[0.3px] h-[2.5px] w-[2.5px] ring-[0.8px]"
+    : "top-[3.8px] -right-[0.5px] h-[3.5px] w-[3.5px] ring-[1px]";
+  const shift = isXs
+    ? "translate-x-[0.2px] -translate-y-[0.2px]"
+    : isSm
+    ? "translate-x-[0.3px] -translate-y-[0.3px]"
+    : "translate-x-[0.5px] -translate-y-[0.5px]";
+
   return (
     <span
-      className={`relative flex shrink-0 items-center justify-center bg-emerald-500 text-white shadow-[0_2px_8px_-2px_rgba(16,185,129,0.35)] transition-transform duration-200 group-hover:scale-105 ${
-        isSm ? "h-5 w-5 rounded-[6.5px]" : "h-7 w-7 rounded-[9px]"
-      } ${className}`}
+      className={`relative flex shrink-0 items-center justify-center bg-emerald-500 text-white shadow-[0_2px_8px_-2px_rgba(16,185,129,0.35)] transition-transform duration-200 group-hover:scale-105 ${dim} ${className}`}
     >
-      <span
-        className={`relative inline-flex items-center justify-center ${
-          isSm ? "translate-x-[0.3px] -translate-y-[0.3px]" : "translate-x-[0.5px] -translate-y-[0.5px]"
-        }`}
-      >
-        <span
-          className={`type-serif italic font-normal leading-none select-none ${
-            isSm ? "text-[14px]" : "text-[20px]"
-          }`}
-        >
+      <span className={`relative inline-flex items-center justify-center ${shift}`}>
+        <span className={`type-serif italic font-normal leading-none select-none ${font}`}>
           v
         </span>
         {/* Notification dot nestled with background-colored knockout ring */}
         <span
           aria-hidden
-          className={`absolute shrink-0 aspect-square rounded-full bg-white ring-emerald-500 ${
-            isSm
-              ? "top-[2.5px] -right-[0.3px] h-[2.5px] w-[2.5px] ring-[0.8px]"
-              : "top-[3.8px] -right-[0.5px] h-[3.5px] w-[3.5px] ring-[1px]"
-          }`}
+          className={`absolute shrink-0 aspect-square rounded-full bg-white ring-emerald-500 ${dot}`}
         />
       </span>
     </span>

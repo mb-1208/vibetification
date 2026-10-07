@@ -79,6 +79,8 @@ export const TRANSLATIONS = {
       f1Body:
         "Notifikasi interaktif langsung di lock screen ponsel atau getaran halus di jam tangan. Tekan Approve untuk commit, atau Reject untuk batalkan tanpa membuka laptop.",
       f1WatchTitle: "Auth Refactor Ready",
+      f1WatchAgent: "Claude Code · 12 test passed",
+      f1WatchSubtitle: "Auth flow selesai, 12 test passed, 0 error. Deploy sekarang?",
       f1Approve: "Approve",
       f1Reject: "Reject",
       f1TestBtn: "Uji Getaran Jam",
@@ -320,6 +322,8 @@ export const TRANSLATIONS = {
       f1Body:
         "Interactive notifications directly on your phone lock screen or subtle vibrations on your smartwatch. Tap Approve to commit, or Reject to abort without opening your laptop.",
       f1WatchTitle: "Auth Refactor Ready",
+      f1WatchAgent: "Claude Code · 12 tests passed",
+      f1WatchSubtitle: "Auth flow complete, 12 tests passed, 0 errors. Deploy now?",
       f1Approve: "Approve",
       f1Reject: "Reject",
       f1TestBtn: "Simulate Wrist Haptic",

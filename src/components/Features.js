@@ -22,6 +22,7 @@ import {
 import { SplitWords, Reveal, SectionIndex, EASE } from "./motion";
 import { useLanguage } from "./LanguageContext";
 import WatchBand from "./WatchBand";
+import { LogoSymbol } from "./Nav";
 
 export default function Features() {
   const { t, lang } = useLanguage();
@@ -278,14 +279,50 @@ function WristVisual() {
         >
           <WatchBand size="lg" />
           <div className="flex aspect-[4/4.7] flex-col justify-between rounded-[48px] sm:rounded-[54px] bg-black px-3.5 py-3.5 sm:px-4 sm:py-4 text-white">
-            <div className="flex items-center justify-between text-[11px] text-white/60">
-              <span className="flex items-center gap-1 font-mono">
-                <IconDeviceWatch size={13} aria-hidden /> Vibetification
+            <div className="flex items-center justify-between text-[10.5px] text-white/60">
+              <span className="flex items-center gap-1.5 text-white">
+                <LogoSymbol size="xs" />
+                <span className="flex items-baseline text-[11px] font-semibold tracking-[-0.03em]" style={{ fontVariationSettings: '"wdth" 92' }}>
+                  <span className="type-serif italic font-normal text-[12.5px] tracking-normal pr-[0.03em]">vibe</span>
+                  <span>tification</span>
+                </span>
               </span>
-              <span>10:42</span>
+              <span className="font-mono text-[10px] text-white/50 tabular-nums">10:42</span>
             </div>
-            <div className="text-[14px] sm:text-[15px] font-semibold leading-tight">
-              {t.features.f1WatchTitle}
+
+            {/* Rich Watch Content matching Gambar 1 */}
+            <div className="my-auto space-y-1 py-0.5 text-left">
+              <div className="flex items-center gap-2">
+                <span
+                  className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-white transition-colors ${
+                    decision === "approve"
+                      ? "bg-ok"
+                      : decision === "reject"
+                      ? "bg-stop"
+                      : "bg-emerald-500/20 text-emerald-400 ring-1 ring-emerald-500/40"
+                  }`}
+                >
+                  {decision === "reject" ? (
+                    <IconX size={13} stroke={2.6} aria-hidden />
+                  ) : (
+                    <IconCheck
+                      size={13}
+                      stroke={2.6}
+                      className={decision === "approve" ? "text-white" : "text-emerald-400"}
+                      aria-hidden
+                    />
+                  )}
+                </span>
+                <span className="font-mono text-[11px] font-medium leading-tight text-emerald-400">
+                  {t.features.f1WatchAgent}
+                </span>
+              </div>
+              <h4 className="text-[13.5px] font-semibold leading-snug text-white sm:text-[14.5px]">
+                {t.features.f1WatchTitle}
+              </h4>
+              <p className="text-[11px] leading-relaxed text-white/65 sm:text-[11.5px]">
+                {t.features.f1WatchSubtitle}
+              </p>
             </div>
             {/* Buttons with generous padding and non-collapsing shrink-0 icons */}
             <div className="grid grid-cols-2 gap-1.5 sm:gap-2">
